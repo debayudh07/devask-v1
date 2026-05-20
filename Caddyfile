@@ -1,0 +1,8 @@
+# Replace yourdomain.com with your actual domain
+yourdomain.com {
+    # Route all Devask API endpoints to the Go server
+    reverse_proxy /ask    devask-server:8081
+    reverse_proxy /upload devask-server:8081
+    reverse_proxy /docs   devask-server:8081
+    reverse_proxy /health devask-server:8081
+}

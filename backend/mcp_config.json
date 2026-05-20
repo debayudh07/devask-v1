@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "devask-backend_engineering_team": {
+      "command": "python",
+      "args": [
+        "d:\\projects\\go-project-fullstack\\backend\\devask-mcp-backend_engineering_team.py"
+      ],
+      "env": {}
+    }
+  }
+}

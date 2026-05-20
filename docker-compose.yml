@@ -1,0 +1,64 @@
+version: '3.9'
+
+services:
+  # ── Python AI Microservice (embedding + BM25 + reranking) ──────────────────
+  python-ai-service:
+    build:
+      context: ./python-ai-service
+    ports:
+      - "8000:8000"
+    volumes:
+      - python_ai_data:/app/data
+    environment:
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+      - PINECONE_INDEX_NAME=${PINECONE_INDEX_NAME:-devask-knowledge}
+      - DEVASK_DATA_DIR=/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Go Devask API Server ───────────────────────────────────────────────────
+  devask-server:
+    build:
+      context: ./backend
+    ports:
+      - "8081:8081"
+    environment:
+      - PORT=8081
+      - PYTHON_AI_SERVICE_URL=http://python-ai-service:8000
+      - LLM_BASE_URL=${LLM_BASE_URL:-https://ollama.com/v1}
+      - LLM_MODEL=${LLM_MODEL:-gpt-oss:120b}
+      - LLM_API_KEY=${LLM_API_KEY}
+    depends_on:
+      python-ai-service:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8081/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # ── Caddy reverse proxy (optional — use: docker compose --profile caddy up) ──
+  caddy:
+    image: caddy:2-alpine
+    profiles:
+      - caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - devask-server
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
+  python_ai_data:
