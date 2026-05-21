@@ -47,6 +47,7 @@ func Start() {
 	uploadHandler := handler.NewUploadHandler(ingestionSvc)
 	askHandler    := handler.NewAskHandler(querySvc)
 	docsHandler   := handler.NewDocsHandler(pyClient)
+	llmHandler    := handler.NewLLMHandler(aiClient)
 
 	// --- Routes ---
 	mux := http.NewServeMux()
@@ -54,6 +55,7 @@ func Start() {
 	mux.Handle("/upload", uploadHandler)
 	mux.Handle("/ask", askHandler)
 	mux.Handle("/docs", docsHandler)
+	mux.Handle("/llm/complete", llmHandler) // OSS LLM proxy — all AI completions route through here
 
 	fmt.Printf("🚀 Devask Server starting on port %s...\n", port)
 	fmt.Printf("   Python AI Service : %s\n", pythonServiceURL)

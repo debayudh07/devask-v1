@@ -1,2 +1,53 @@
+# ─── Secrets & local config ───────────────────────────────────────────────────
 .env
+.env.*
+!.env.example
+
+# ─── Go build artefacts ───────────────────────────────────────────────────────
+# Compiled binaries / executables
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+devask
 devask.exe
+
+# Test & coverage output
+*.test
+*.out
+coverage.html
+coverage.txt
+
+# Go module download cache (never commit)
+vendor/
+
+# ─── Generated SKILL / MCP files ──────────────────────────────────────────────
+# These are generated on-demand; commit intentionally if you want to share them
+SKILL.md
+SKILL-*.md
+devask-mcp-*.py
+mcp_config.json
+
+# ─── IDE & editor artefacts ───────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ─── OS artefacts ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Docker ───────────────────────────────────────────────────────────────────
+# Local override compose files
+docker-compose.override.yml
+
+# ─── Migrations (keep schema, ignore state files) ─────────────────────────────
+migrations/*.lock
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/

@@ -171,6 +171,72 @@ func (c *Client) BaseURL() string {
 	return c.cfg.BaseURL
 }
 
+// serverCompleteRequest / serverCompleteResponse mirror the handler types.
+type serverCompleteRequest struct {
+	Messages []Message `json:"messages"`
+}
+
+type serverCompleteResponse struct {
+	Content string `json:"content"`
+	Model   string `json:"model"`
+}
+
+type serverErrorResponse struct {
+	Error string `json:"error"`
+}
+
+// CompleteViaServer sends messages to the Devask server's /llm/complete proxy
+// instead of hitting the LLM API directly.  Use this in CLI commands so all
+// OSS model traffic is routed through the central devask server.
+//
+//	serverURL — e.g. "http://localhost:8081"
+func (c *Client) CompleteViaServer(serverURL string, messages []Message) (string, error) {
+	payload := serverCompleteRequest{Messages: messages}
+
+	body, err := json.Marshal(payload)
+	if err != nil {
+		return "", fmt.Errorf("marshal server request: %w", err)
+	}
+
+	endpoint := strings.TrimRight(serverURL, "/") + "/llm/complete"
+	req, err := http.NewRequest(http.MethodPost, endpoint, bytes.NewBuffer(body))
+	if err != nil {
+		return "", fmt.Errorf("create server request: %w", err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return "", fmt.Errorf("call devask server (%s): %w", endpoint, err)
+	}
+	defer resp.Body.Close()
+
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", fmt.Errorf("read server response: %w", err)
+	}
+
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		var errResp serverErrorResponse
+		_ = json.Unmarshal(respBody, &errResp)
+		if errResp.Error != "" {
+			return "", fmt.Errorf("devask server error: %s", errResp.Error)
+		}
+		return "", fmt.Errorf("devask server returned HTTP %d: %s", resp.StatusCode, string(respBody))
+	}
+
+	var result serverCompleteResponse
+	if err := json.Unmarshal(respBody, &result); err != nil {
+		return "", fmt.Errorf("unmarshal server response: %w (body: %s)", err, string(respBody))
+	}
+
+	if result.Content == "" {
+		return "", fmt.Errorf("devask server returned empty content")
+	}
+
+	return result.Content, nil
+}
+
 // SynthesizeAnswer builds a RAG prompt from context chunks and a question, then calls the LLM.
 func (c *Client) SynthesizeAnswer(question string, contextChunks []string) (string, error) {
 	contextBlock := ""

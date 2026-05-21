@@ -1,3 +1,82 @@
+# ─── Secrets & local config ───────────────────────────────────────────────────
 .env
-__pycache__
-data
+.env.*
+!.env.example
+
+# ─── Python bytecode & caches ────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.mypy_cache/
+.ruff_cache/
+.pytype/
+
+# ─── Virtual environments ─────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.conda/
+# Anaconda/Conda envs inside the project
+envs/
+
+# ─── Package / distribution build artefacts ──────────────────────────────────
+dist/
+build/
+*.egg-info/
+*.egg
+MANIFEST
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+
+# ─── Testing & coverage ───────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.cover
+*.py,cover
+nosetests.xml
+coverage.xml
+junit*.xml
+
+# ─── Devask runtime data (generated at runtime — never commit) ────────────────
+# BM25 store and any other persisted in-memory state
+data/
+*.json.tmp
+
+# ─── ML model caches (sentence-transformers downloads) ───────────────────────
+# These can be gigabytes; always re-download from HuggingFace
+.cache/
+models/
+*.bin
+*.safetensors
+*.ot
+*.onnx
+*.pt
+*.pth
+
+# ─── Jupyter notebooks (if used for experimentation) ─────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ─── IDE & editor artefacts ───────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ─── OS artefacts ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Docker ───────────────────────────────────────────────────────────────────
+docker-compose.override.yml
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
