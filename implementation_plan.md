@@ -48,7 +48,7 @@
 - ✅ Go server `/ask` handler — full RAG pipeline
 - ✅ Query service — Pinecone retrieval (top 10) → Cross-Encoder rerank (top 3) → LLM synthesis
 - ✅ OpenRouter integration — `meta-llama/llama-3.2-3b-instruct:free` model
-  - Management key used to provision inference key: `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`
+  - Management key used to provision inference key: 
   - Key stored in `backend/.env` as `OPENROUTER_API_KEY`
 - ✅ New packages: `backend/pkg/pyclient`, `backend/pkg/aiclient`
 - ✅ New services: `backend/internal/service/ingestion.go`, `backend/internal/service/query.go`

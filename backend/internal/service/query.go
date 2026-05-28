@@ -3,8 +3,8 @@ package service
 import (
 	"fmt"
 
-	"backend/pkg/aiclient"
-	"backend/pkg/pyclient"
+	"github.com/debayudh07/devask/pkg/aiclient"
+	"github.com/debayudh07/devask/pkg/pyclient"
 )
 
 // QueryService handles the full RAG pipeline: hybrid-retrieve → rerank → synthesize.

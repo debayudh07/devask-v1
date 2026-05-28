@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"backend/internal/config"
-	"backend/pkg/pyclient"
+	"github.com/debayudh07/devask/internal/config"
+	"github.com/debayudh07/devask/pkg/pyclient"
 	"github.com/spf13/cobra"
 )
 

@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	"backend/internal/config"
+	"github.com/debayudh07/devask/internal/config"
 	"github.com/spf13/cobra"
 )
 

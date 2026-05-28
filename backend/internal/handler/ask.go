@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"backend/internal/service"
+	"github.com/debayudh07/devask/internal/service"
 )
 
 // AskHandler handles POST /ask requests.

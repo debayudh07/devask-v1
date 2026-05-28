@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"os"
 
-	"backend/internal/handler"
-	"backend/internal/service"
-	"backend/pkg/aiclient"
-	"backend/pkg/pyclient"
+	"github.com/debayudh07/devask/internal/handler"
+	"github.com/debayudh07/devask/internal/service"
+	"github.com/debayudh07/devask/pkg/aiclient"
+	"github.com/debayudh07/devask/pkg/pyclient"
 )
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {

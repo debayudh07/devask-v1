@@ -1,4 +1,4 @@
-module backend
+module github.com/debayudh07/devask
 
 go 1.26.3
 

@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"backend/internal/cli"
+	"github.com/debayudh07/devask/internal/cli"
 	"github.com/joho/godotenv"
 )
 

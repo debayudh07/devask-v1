@@ -5,10 +5,10 @@ import (
 	"os"
 	"strings"
 
-	"backend/internal/config"
-	"backend/internal/service"
-	"backend/pkg/aiclient"
-	"backend/pkg/pyclient"
+	"github.com/debayudh07/devask/internal/config"
+	"github.com/debayudh07/devask/internal/service"
+	"github.com/debayudh07/devask/pkg/aiclient"
+	"github.com/debayudh07/devask/pkg/pyclient"
 	"github.com/spf13/cobra"
 )
 

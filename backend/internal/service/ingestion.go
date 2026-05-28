@@ -6,7 +6,7 @@ import (
 	"strings"
 	"unicode"
 
-	"backend/pkg/pyclient"
+	"github.com/debayudh07/devask/pkg/pyclient"
 )
 
 // IngestionService handles document upload and chunking logic.

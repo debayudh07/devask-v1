@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"backend/internal/service"
+	"github.com/debayudh07/devask/internal/service"
 )
 
 // UploadHandler handles POST /upload requests.

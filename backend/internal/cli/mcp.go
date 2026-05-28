@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"backend/internal/config"
-	"backend/internal/service"
+	"github.com/debayudh07/devask/internal/config"
+	"github.com/debayudh07/devask/internal/service"
 	"github.com/spf13/cobra"
 )
 

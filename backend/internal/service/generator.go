@@ -8,8 +8,8 @@ import (
 	"text/template"
 	"time"
 
-	"backend/internal/config"
-	"backend/pkg/aiclient"
+	"github.com/debayudh07/devask/internal/config"
+	"github.com/debayudh07/devask/pkg/aiclient"
 )
 
 // GeneratorService handles SKILL.md and MCP server script generation.

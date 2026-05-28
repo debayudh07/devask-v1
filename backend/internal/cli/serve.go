@@ -1,7 +1,7 @@
 package cli
 
 import (
-	"backend/internal/server"
+	"github.com/debayudh07/devask/internal/server"
 
 	"github.com/spf13/cobra"
 )

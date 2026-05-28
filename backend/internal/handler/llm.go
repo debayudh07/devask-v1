@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"backend/pkg/aiclient"
+	"github.com/debayudh07/devask/pkg/aiclient"
 )
 
 // LLMHandler proxies chat-completion requests through the Devask server to the

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"backend/pkg/pyclient"
+	"github.com/debayudh07/devask/pkg/pyclient"
 )
 
 // DocsHandler handles GET /docs requests.
